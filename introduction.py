@@ -6,7 +6,8 @@ line = "\n--------------------------------------------\n"
 print("Welcome! This is pirogramming.\n반갑습니다. 여기는 <피로한 피로그래밍 (12기 ver.)>입니다.")
 
 time.sleep(2)
-name = input("\n성모: 안녕하세요! 만나서 반갑습니다. 이름이 무엇인가요?")
+name_2 = input("\n성모: 안녕하세요! 만나서 반갑습니다. 이름이 무엇인가요?")
+name = name_2
 print("{0}: {0}".format(name))
 
 def intorduction():

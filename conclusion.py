@@ -1,6 +1,5 @@
 # TODO : Conclusion
 
-import introduction
 
 import time
 
@@ -14,7 +13,7 @@ def conclusion():
     print(line)
 
     time.sleep(2)
-    print("성모: 수고하셨습니다. {}님은 이제 진정한 피로그래머입니다.".format(introduction.name))
+    print("성모: 수고하셨습니다. 당신은 이제 진정한 피로그래머입니다.")
     time.sleep(2)
     print("성모: 앞으로 있을 모든 피로그래밍 활동에서")
     time.sleep(2)
