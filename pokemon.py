@@ -30,6 +30,11 @@ def which_game_to_play(value):
             print('')
             print('')
             import black_and_white
+        elif value_2 == 2:
+            time.sleep(5)
+            print("")
+            print("")
+            import indian_poker
         else: 
             print('잘못 입력하였습니다.')
             value = input('플레이할 게임을 선택하세요 : ')
