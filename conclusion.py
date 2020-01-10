@@ -1,5 +1,7 @@
 # TODO : Conclusion
 
+import introduction
+
 import time
 
 def conclusion():
@@ -23,3 +25,4 @@ def conclusion():
     print("<피로한 피로그래밍 (12기 ver.)> 게임을 종료합니다.")
     print("<피로한 피로그래밍 (13기 운영진 ver.)>은 2020년 6월에 출시됩니다.")
     print(line)
+conclusion()
