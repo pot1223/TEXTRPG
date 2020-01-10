@@ -1,6 +1,6 @@
 import introduction
 import MBTI
-import Commute2
+import CommuteGame
 import lunch
 import pokemon
 import conclusion

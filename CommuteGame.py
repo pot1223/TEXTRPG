@@ -11,7 +11,7 @@ table = {'DMC':((0,0), (-10,-5)), '합정':((0,0), (-25, -15)), '신촌':((0,0),
          '까치산':((0,0), (-10, -5), (-10, -5)), '영등포구청':((0,0), (-20, -10)), '노량진':((0,0), (-10, -5), (-10, -5)),
          '약수':((0,0), (-15, -10)), '뚝섬':((0,0), (-40, -30), (-15, -20)), '계양':((0,0), (-15, -10), (-10, -5)),
          '신도림':((0,0), (-15, -10)), '숭실대입구':((0,0), (-10, -5), (-5, -5)), '고속터미널':((0,0), (-5, -5)),
-         '건대':((0,0), (-35, -25)), '부평구청':((0,0), (-30, -20)), '대림':((0,0), (-15, -5)), '교대':((0,0), (-10, -5)),
+         '건대입구':((0,0), (-35, -25)), '부평구청':((0,0), (-30, -20)), '대림':((0,0), (-15, -5)), '교대':((0,0), (-10, -5)),
          '잠실':((0,0), (-30, -20))}
 
 destination = {'DMC':(None, (0,1)), '합정':((0,0), (4,2)), '신촌':((0,0), (4,2)),
@@ -20,7 +20,7 @@ destination = {'DMC':(None, (0,1)), '합정':((0,0), (4,2)), '신촌':((0,0), (4
          '까치산':((0,0), (3, 1), (2, 1)), '영등포구청':((0,0), (4, 2)), '노량진':((0,0), (3, 1), (4, 2)),
          '약수':((0,0), (4, 3)), '뚝섬':((0,0), (4, 2), None), '계양':((0,0), (4, 0), (1, 0)),
          '신도림':((0,0), (4, 2)), '숭실대입구':((0,0), None, (4, 2)), '고속터미널':((0,0), (4, 3)),
-         '건대':((0,0), (4, 2)), '부평구청':((0,0), (4, 1)), '대림':((0,0), (4, 2)), '교대':((0,0), (4, 2)),
+         '건대입구':((0,0), (4, 2)), '부평구청':((0,0), (4, 1)), '대림':((0,0), (4, 2)), '교대':((0,0), (4, 2)),
          '잠실':((0,0), (4, 2))}
 
 
@@ -188,31 +188,8 @@ def exception(pos):
         print("또 한 번 5511과 친해질 기회군요!")
         print("(시간: -5, 체력: -5)")
         return (-10, -10)
-        
-    
 
-def commutegame():
-    for i in range(len(commute)):
-        for j in range(len(commute[i])):
-            if commute[i][j] == 'None':
-                print('■■■\t\t ', end='')
-            elif len(commute[i][j])>=4:
-                print('{0}\t '.format(commute[i][j]), end='')
-            else:
-                print('{0}\t\t '.format(commute[i][j]), end='')
-        print("")
-
-    import random
-
-    name = input("\n당신의 이름은? ")
-
-    a = random.randint(0, 4)
-    b = random.randint(0, 4)
-
-    me = Gamer(name, a, b)
-
-    home = commute[a][b]
-
+def commutegame(a, b):
     print("\n당신의 위치는 {0}입니다.".format(commute[a][b]))
     print("현재 남은 시간은 {0}이며, 체력은 {1} 남았습니다.\n".format(me.time, me.energy))
 
@@ -268,3 +245,81 @@ def commutegame():
                         print('{0}\t\t '.format(commute[i][j]), end='')
                 print("")
     
+for i in range(len(commute)):
+    for j in range(len(commute[i])):
+        if commute[i][j] == 'None':
+            print('■■■\t\t ', end='')
+        elif len(commute[i][j])>=4:
+            print('{0}\t '.format(commute[i][j]), end='')
+        else:
+            print('{0}\t\t '.format(commute[i][j]), end='')
+    print("")
+
+import random
+
+from introduction import name
+
+a = random.randint(0, 4)
+b = random.randint(0, 4)
+
+me = Gamer(name, a, b)
+
+home = commute[a][b]
+print("\n당신의 위치는 {0}입니다.".format(commute[a][b]))
+print("현재 남은 시간은 {0}이며, 체력은 {1} 남았습니다.\n".format(me.time, me.energy))
+
+while 1:
+    qwer = input('명령어를 입력하세요.\n계속한다 : c, 맵을 본다 : m\n')
+    print("")
+
+    if qwer == 'c':
+        dest = question(commute[a][b])
+        if dest[1] == 0:
+            print("오오 이불밖은 위험해~ 집에 가서 귤이나 까자 예~")
+            print("Game Over")
+            print("---------------------------------------------------------------\n\n")
+            break
+        me.position = destination[dest[0]][dest[1]]
+        temp = me.pos()
+        a = temp[0]
+        b = temp[1]
+
+        print("당신의 위치는 {0}입니다.".format(commute[a][b]))
+        print("현재 남은 시간은 {0}이며, 체력은 {1} 남았습니다.\n".format(me.time, me.energy))
+
+        if me.pos() == (4, 2):
+            print("서울대 입구에 도착하였습니다..!!")
+            print("5511번 버스에 몸을 욱여 넣고 관악의 향기를 맡아봅니다.")
+            print("도착!!")
+            print("오늘 당신의 출근길은..??")
+            print("")
+            print("남은 체력: {0}, 남은 시간(분): {1}".format(me.energy, me.time))
+            if me.time>=20:
+                print("시간이 남아도네요~ 부지런한 당신은 『Black Cow』!!")
+            elif 10<=me.time<20:
+                print("모두에게 좋은 인상을 심어줄 수 있는 시간이네요!! 오늘 당신은 『히터틀기 당번』!!")
+            elif 5<=me.time<10:
+                print("프로그래밍을 하고자 하는 자세가 되어있군요!! 당신은 『인간 알람시계』!!")
+            elif 0<=me.time<5:
+                print("아슬아슬하지만 오늘도 제시간에 오셨군요!! 오늘 당신은 『버저비터 장인』!!")
+            else:
+                print("회장님이 실망하는 표정입니다. 눈을 마주치지 마세요. 오늘 당신은 『프로눈치러』!!")
+            print("---------------------------------------------------------------\n\n")
+            break
+        elif me.energy<=0:
+            print("당신의 체력이 바닥났습니다. 집에나 가야죠 ㅠㅠ")
+            print("Game Over")
+            print("---------------------------------------------------------------\n\n")
+            break
+    elif qwer == 'm':
+        for i in range(len(commute)):
+            for j in range(len(commute[i])):
+                if i==me.position[0] and j==me.position[1]:
+                    print('★★나★★\t ', end='')
+                elif commute[i][j] == 'None':
+                    print('■■■\t\t ', end='')
+                elif len(commute[i][j])>=4:
+                    print('{0}\t '.format(commute[i][j]), end='')
+                else:
+                    print('{0}\t\t '.format(commute[i][j]), end='')
+            print("")
