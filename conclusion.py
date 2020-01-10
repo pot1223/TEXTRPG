@@ -1,7 +1,6 @@
 # TODO : Conclusion
 
 import time
-from. import introduction
 
 def conclusion():
     line = "\n--------------------------------------------\n"
